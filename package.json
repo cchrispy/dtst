@@ -2,9 +2,10 @@
   "name": "dtst",
   "version": "1.0.0",
   "description": "A collection of data structures to use",
-  "main": "./src/index.js",
+  "main": "./dist/index.min.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --compilers js:babel-core/register --recursive test",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",

@@ -104,4 +104,4 @@ class Tree {
   }
 }
 
-module.exports = Tree;
+export default Tree;
