@@ -17,30 +17,47 @@ class Tree {
     this.size = val ? 1 : 0;
   }
 
-  searchDF(cb, node = this._head) {
+  searchDF(cb, _node = this._head) {
     /*
     ** Depth-first traversal to visit the nodes of the tree
     ** and invoke a callback function on each node
     */
-    cb(node);
-    for (let i = 0; i < node.children.length; i++) {
-      this.searchDF(cb, node.children[i]);
+    cb(_node);
+    for (let i = 0; i < _node.children.length; i++) {
+      this.searchDF(cb, _node.children[i]);
     }
   }
 
-  searchBF(cb, queue = [this._head]) {
+  searchBF(cb, _queue = [this._head]) {
     /*
     ** Breadth-first traversal to visit the nodes of the tree
     ** and invoke a callback function on each node
     */
-    var node = queue.shift();
+    var node = _queue.shift();
     for (let i = 0; i < node.children.length; i++) {
-      queue.push(node.children[i]);
+      _queue.push(node.children[i]);
     }
     cb(node);
-    if (queue.length) {
-      this.searchBF(cb, queue);
+    if (_queue.length) {
+      this.searchBF(cb, _queue);
     }
+  }
+
+  contains(val, cb) {
+    /*
+    ** Search the tree for a particular value or node.
+    ** An optional callback can be passed to be invoked on the node, if it exists.
+    ** The result of the callback will be returned, otherwise the node will be returned
+    ** If the value or node does not exist, return false.
+    ** By default, this function will utilize a breadth-first search
+    */
+    var result = false;
+    this.searchBF(node => {
+      if (node.val === val || node === val) {
+        result = cb ? cb(node) : node;
+      }
+    })
+    return result;
   }
 
   addNode(val, parent) {
@@ -68,21 +85,22 @@ class Tree {
     return _node;
   }
 
-  contains(val, cb) {
+  removeNode(node) {
     /*
-    ** Search the tree for a particular value or node.
-    ** An optional callback can be passed to be invoked on the node, if it exists.
-    ** The result of the callback will be returned, otherwise the node will be returned
-    ** If the value or node does not exist, return false.
-    ** By default, this function will utilize a breadth-first search
+    ** Removes a node and all of its descendent children from the tree.
+    ** Keep a count of the number of descendents, so the tree's size can be adjusted.
+    ** Return the removed node.
     */
-    var result = false;
-    this.searchBF(node => {
-      if (node.val === val || node === val) {
-        result = cb ? cb(node) : node;
-      }
-    })
-    return result;
+    var count = 0;
+    this.searchDF(() => count++, node);
+
+    /*
+    ** Splice out the node from the parent's children
+    */
+    node.parent.children = node.parent.children.filter(child => child !== node);
+
+    this.size -= count;
+    return node;
   }
 }
 
