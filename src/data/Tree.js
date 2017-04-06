@@ -13,8 +13,8 @@ class Tree {
     ** otherwise set the root node as null
     ** Set the size of the tree appropriately
     */
-    this._head = val ? new Node(val) : null;
-    this.size = val ? 1 : 0;
+    this._head = val !== undefined ? new Node(val) : null;
+    this.size = val !== undefined ? 1 : 0;
   }
 
   searchDF(cb, _node = this._head) {
@@ -105,3 +105,4 @@ class Tree {
 }
 
 export default Tree;
+export { Node };

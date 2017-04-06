@@ -1,12 +1,73 @@
 import { expect } from 'chai';
-import Tree from '../src/data/Tree';
+import Tree, { Node } from '../src/data/Tree';
 
 describe('Tree', () => {
 
-  const tree = new Tree();
+  var tree;
+  beforeEach(() => {
+    tree = new Tree();
+  })
 
   it('Should be a constructor', () => {
     expect(tree).to.be.an.instanceof(Tree);
+  });
+
+  it('Should have searchDF, searchBF, contains, addNode, removeNode methods', () => {
+    expect(tree.searchDF).to.be.a('function');
+    expect(tree.searchBF).to.be.a('function');
+    expect(tree.contains).to.be.a('function');
+    expect(tree.addNode).to.be.a('function');
+    expect(tree.removeNode).to.be.a('function');
   })
 
+  it('Should allow a tree to be initiated without a value', () => {
+    expect(tree.size).to.equal(0);
+    expect(tree._head).to.be.null;
+  })
+
+  it('Should allow a tree to be initiated with a value', () => {
+    var newTree = new Tree('Root');
+    expect(newTree.size).to.equal(1);
+    expect(newTree._head).to.be.an.instanceof(Node);
+    expect(newTree._head.val).to.equal('Root');
+    expect(newTree._head.children).to.be.an('array').and.have.lengthOf(0);
+  })
+
+  it('Adding a value to an empty tree should set the root node', () => {
+    expect(tree._head).to.be.null;
+    expect(tree.size).to.equal(0);
+
+    tree.addNode('Root');
+    expect(tree._head).to.be.an.instanceof(Node);
+    expect(tree._head.val).to.equal('Root');
+    expect(tree.size).to.equal(1);
+  })
+
+  describe('Tree methods', () => {
+
+    it('Add Node', () => {
+      var tree = new Tree();
+      var rootNode = tree.addNode('root');
+      var child_1 = tree.addNode(1);
+      var child_2 = tree.addNode(2);
+      var child_3 = tree.addNode(3, child_1);
+      var child_4 = tree.addNode(4, child_3);
+      var child_5 = tree.addNode(5, child_2);
+
+      var depthFirst = ['root', 1, 3, 4, 2, 5];
+      var breadthFirst = ['root', 1, 2, 3, 5, 4];
+
+      expect(tree.size).to.equal(6);
+      
+      var temp1 = [];
+      var temp2 = [];
+      tree.searchDF(node => temp1.push(node.val));
+      tree.searchBF(node => temp2.push(node.val));
+
+      expect(temp1).to.eql(depthFirst);
+      expect(temp2).to.eql(breadthFirst);
+      expect(tree.contains(5)).to.be.instanceof(Node);
+
+    })
+  })
 })
