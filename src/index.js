@@ -1,5 +1,3 @@
-const Tree = require('./data/Tree');
+import Tree from './data/Tree';
 
-module.exports = {
-  Tree
-}
+export default { Tree }
