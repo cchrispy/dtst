@@ -24,7 +24,7 @@ class Tree {
     */
     cb(node);
     for (let i = 0; i < node.children.length; i++) {
-      searchDF(cb, node.children[i]);
+      this.searchDF(cb, node.children[i]);
     }
   }
 
@@ -51,17 +51,14 @@ class Tree {
       ** Assign the node to the root if no root node exists in the tree
       */
       this._head = _node;
-    } else if (parent) {
-      /*
-      ** Attach the new node to the referenced node (parent -> child)
-      */
-      _node.parent = parent;
-      parent.children.push(_node);
     } else {
       /*
-      ** If there is no referenced parent node, throw Error
+      ** Attach the new node to the referenced node (parent -> child)
+      ** If no parent node is supplied, add it to the root node
       */
-      throw new Error('Need a parent node to add the new node to.');
+      var _parent = parent || this._head;
+      _node.parent = _parent;
+      _parent.children.push(_node);
     }
     /*
     ** Increment the size of the tree.
@@ -69,6 +66,23 @@ class Tree {
     */
     this.size++;
     return _node;
+  }
+
+  contains(val, cb) {
+    /*
+    ** Search the tree for a particular value or node.
+    ** An optional callback can be passed to be invoked on the node, if it exists.
+    ** The result of the callback will be returned, otherwise the node will be returned
+    ** If the value or node does not exist, return false.
+    ** By default, this function will utilize a breadth-first search
+    */
+    var result = false;
+    this.searchBF(node => {
+      if (node.val === val || node === val) {
+        result = cb ? cb(node) : node;
+      }
+    })
+    return result;
   }
 }
 
