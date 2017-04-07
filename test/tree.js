@@ -45,7 +45,7 @@ describe('Tree', () => {
 
   describe('Tree methods', () => {
 
-    it('Add Node', () => {
+    it('Add Nodes', () => {
       var tree = new Tree();
       var rootNode = tree.addNode('root');
       var child_1 = tree.addNode(1);
@@ -68,6 +68,35 @@ describe('Tree', () => {
       expect(temp2).to.eql(breadthFirst);
       expect(tree.contains(5)).to.be.instanceof(Node);
 
+    })
+
+    it('Delete Nodes', () => {
+      var tree = new Tree(1);
+      var two = tree.addNode(2);
+      var three = tree.addNode(3);
+      var four = tree.addNode(4, two);
+      var five = tree.addNode(5, two);
+      var six = tree.addNode(6, three);
+      tree.addNode(7, six);
+      tree.addNode(8, six);
+
+      var breadthFirst = [1, 2, 3, 4, 5, 6, 7, 8];
+
+      var temp = [];
+      tree.searchBF(node => temp.push(node.val));
+
+      expect(temp).to.eql(breadthFirst);
+      expect(tree.size).to.equal(8);
+
+      tree.removeNode(six);
+
+      var breadthFirst2 = [1, 2, 3, 4, 5];
+      var temp2 = [];
+      tree.searchBF(node => temp2.push(node.val));
+      expect(temp2).to.eql(breadthFirst2);
+      expect(tree.size).to.equal(5);
+      expect(three.children).to.have.lengthOf(0);
+      expect(tree.contains(6)).to.be.false;
     })
   })
 })
