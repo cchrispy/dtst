@@ -18,19 +18,18 @@ class Trie {
     this._root = new Node('');
   }
 
+  /*
+  ** Input a string into the Trie.
+  ** Iterate through the word while traveling down the nodes.
+  ** If a node does not have the next letter in its children, create a new child node and add it.
+  */
   add(word) {
-    /*
-    ** Inputs a string into the Trie.
-    ** Iterate through the word while traveling down the nodes.
-    ** If a node does not have the next letter in its children, create a new child node and add it.
-    */
 
     /* Keep track of the current node while traveling down the tree, starting with the root */
     var currentNode = this._root;
 
-    /* Loop through the letters of the inputted word */
+    /* Iterate through the letters of the inputted word */
     for (let i = 0; i < word.length; i++) {
-
       let char = word[i];
 
       /* If the next character is not a child of the current node, create a new node and add it */
@@ -46,24 +45,43 @@ class Trie {
     return true;
   }
 
+  /*
+  ** Removes a string from the Trie, including all words that branch off the string
+  */
   remove(prefix) {
-    /*
-    ** Removes a string from the Trie, including all words that branch off the string
-    */
 
   }
 
+  /*
+  ** Check if a given word/prefix exists in the Trie.
+  ** Iterate through the word while traveling down the nodes and checking for the appropriate child nodes.
+  */
   contains(word) {
-    /*
-    ** Check if a given word/prefix exists in the Trie
-    */
 
+    /* Keep track of the current node while traveling down the tree, starting with the root */
+    var currentNode = this._root;
+
+    /* Iterate through the letters of the word */
+    for (let i = 0; i < word.length; i++) {
+      let char = word[i];
+
+      /* If the next character is not a child, break out of the loop by returning false */
+      if (!currentNode.children[char]) {
+        return false;
+      }
+
+      /* Update the current node for the next character */
+      currentNode = currentNode.children[char];
+    }
+
+    /* If the loop completes, the word/prefix must exist in the trie. Return true */
+    return true;
   }
 
+  /*
+  ** Return the words that branch off of a given prefix
+  */
   predict(prefix) {
-    /*
-    ** Return the words that branch off of a given prefix
-    */
 
   }
 }
