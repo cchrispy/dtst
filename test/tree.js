@@ -1,5 +1,6 @@
 import { expect } from 'chai';
-import Tree, { Node } from '../src/data/Tree';
+import Tree from '../src/data/Tree';
+import Node from '../src/data/utils/Node';
 
 describe('Tree', () => {
 
@@ -93,6 +94,7 @@ describe('Tree', () => {
       var breadthFirst2 = [1, 2, 3, 4, 5];
       var temp2 = [];
       tree.searchBF(node => temp2.push(node.val));
+      
       expect(temp2).to.eql(breadthFirst2);
       expect(tree.size).to.equal(5);
       expect(three.children).to.have.lengthOf(0);

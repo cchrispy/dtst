@@ -1,10 +1,4 @@
-class Node {
-  constructor(val) {
-    this.val = val;
-    this.parent = null;
-    this.children = [];
-  }
-}
+import Node from './utils/Node';
 
 class Tree {
   constructor(val) {
@@ -105,4 +99,3 @@ class Tree {
 }
 
 export default Tree;
-export { Node };
