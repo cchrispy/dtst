@@ -46,6 +46,7 @@ describe('Trie', () => {
     it('Predict() returns words with the appropriate prefix', () => {
       expect(trie.predict('a')).to.have.lengthOf(7)
         .and.have.members(["abrupt", "acid", "adventurous", "ahead", "amused", "appliance", "attach"]);
+      expect(trie.predict('z')).to.have.lengthOf(0);
       expect(trie.predict('mo')).to.have.lengthOf(2)
         .and.have.members(["moaning", "monkey"]);
       expect(trie.predict('monkey')).to.have.lengthOf(0);
@@ -58,14 +59,21 @@ describe('Trie', () => {
       expect(trie.remove.bind(trie, '')).to.throw(Error);
       expect(trie.remove.bind(trie)).to.throw(Error);
       expect(trie.remove.bind(trie, 'abcd')).to.throw(Error);
-    })
+    });
 
     it('Remove() removes the prefix and all descendent words', () => {
       trie.remove('bushes');
       expect(trie.contains('bushes')).to.be.false;
-      expect(trie.predict('b')).to.have.lengthOf(6)
+      expect(trie.predict('b')).to.have.lengthOf(7)
         .and.have.members(["bee", "better", "borrow", "bouncy", "branch", "brave", "business"]);
-    })
+
+      trie.remove('rem');
+      expect(trie.contains('reminder')).to.be.false;
+      expect(trie.contains('remind')).to.be.false;
+      expect(trie.contains('replace')).to.be.true;
+      expect(trie.predict('r')).to.have.lengthOf(4)
+        .and.have.members(["racial", "replace", "ripe", "roll"]);
+    });
 
   });
 });

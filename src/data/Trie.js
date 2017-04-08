@@ -53,11 +53,11 @@ class Trie {
   remove(prefix) {
 
     /* If the inputted string does not exist in the Trie, throw an Error                      */
-    if (!this.contains(prefix)) {
-      throw new Error('Invalid input: word not found');
-    }
     if (!prefix) {
       throw new Error('Invalid input: enter a valid string');
+    }
+    if (!this.contains(prefix)) {
+      throw new Error('Invalid input: word not found');
     }
 
     /* Keep track of the current node while traveling down the tree, starting with the root   */
@@ -79,7 +79,7 @@ class Trie {
     }
 
     /* From the most recent branch, delete the next letter                                    */
-    delete branchPoint[0][branchPoint[1]];
+    delete branchPoint[0].children[branchPoint[1]];
 
     return true;
   }
@@ -118,9 +118,9 @@ class Trie {
   */
   predict(prefix) {
 
-    /* If the inputted string does not exist in the Trie, throw an Error     */
+    /* If the inputted string does not exist in the Trie, return empty []    */
     if (!this.contains(prefix)) {
-      throw new Error('Invalid input: word not found');
+      return [];
     }
 
     var currentNode = this._root;
