@@ -165,3 +165,4 @@ class Trie {
 }
 
 export default Trie;
+export { Node };
