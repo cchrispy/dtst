@@ -56,6 +56,9 @@ class Trie {
     if (!this.contains(prefix)) {
       throw new Error('Invalid input: word not found');
     }
+    if (!prefix) {
+      throw new Error('Invalid input: enter a valid string');
+    }
 
     /* Keep track of the current node while traveling down the tree, starting with the root   */
     var currentNode = this._root;
