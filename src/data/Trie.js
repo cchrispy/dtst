@@ -39,7 +39,7 @@ class Trie {
       }
 
       /* Update the current node for the next character */
-      currentNode = currentNode[char];
+      currentNode = currentNode.children[char];
     }
 
     return true;
@@ -51,6 +51,12 @@ class Trie {
   ** and remove the appropriate child node from that branching node to delete the word.
   */
   remove(prefix) {
+
+    /* If the inputted string does not exist in the Trie, throw an Error                      */
+    if (!this.contains(prefix)) {
+      throw new Error('Invalid input: word not found');
+    }
+
     /* Keep track of the current node while traveling down the tree, starting with the root   */
     var currentNode = this._root;
     /* Keep track of the latest branching node and the next character, stored as a tuple      */
@@ -58,14 +64,14 @@ class Trie {
     var branchPoint = [this._root, prefix[0]];
 
     for (let i = 0; i < prefix.length; i++) {
-      let char = word[i];
+      let char = prefix[i];
 
       /* If there is more than 1 child node, there must be a branch point from that letter    */
       /* Update the branchPoint with the current node and the next letter                     */
       if (Object.keys(currentNode.children).length > 1) {
         branchPoint = [currentNode, char];
       }
-      
+
       currentNode = currentNode.children[char];
     }
 
@@ -102,10 +108,59 @@ class Trie {
   }
 
   /*
-  ** Return the words that branch off of a given prefix
+  ** Return the words that branch off of a given prefix.
+  ** Identify the node corresponding to the last letter, and travel down the child nodes to the leaves
+  ** while remembering the sequence of nodes/letters visited.
+  ** Return an array of all the predicted words
   */
   predict(prefix) {
 
+    /* If the inputted string does not exist in the Trie, throw an Error     */
+    if (!this.contains(prefix)) {
+      throw new Error('Invalid input: word not found');
+    }
+
+    var currentNode = this._root;
+
+    /* Iterate to the end of the prefix to grab a reference of the last node */
+    for (let i = 0; i < prefix.length; i++) {
+      let char = prefix[i];
+      currentNode = currentNode.children[char];
+    }
+
+    /* Utilize _gatherWords() to gather all sequences of letters             */
+    /* that branch from the last node, down to the leaves.                   */
+    /* Prepend the prefix to each of these words; return the resulting array */
+    return this._gatherWords(currentNode).map(word => prefix + word);
+  }
+
+  /*
+  ** Helper function to gather completed words by traveling down from a given node to the leaves of the trie.
+  ** 3 inputs: the current node, the current sequence of letters gathered so far, and the 
+  ** collection of words that have already been completed (when a leaf has been reached).
+  */
+  _gatherWords(node, str = '', words = []) {
+
+    /* Take the child nodes (branches) of the current node */
+    var chars = Object.keys(node.children);
+
+    /* Base case: we have reached a leaf node, thus a word is complete                                 */
+    /* If there are no child nodes, the current node must be a leaf                                    */
+    /* If the sequence of letters is non-empty, push the completed word to the words array             */
+    /* Otherwise return an empty array                                                                 */
+    if (!chars.length) {
+      if (str) {
+        words.push(str);
+      }
+    }
+
+    /* Go through the nodes that branch off the current node and add the letters to the growing string */
+    /* Travel down child nodes recursively; continue building the word until the base case is reached  */
+    chars.forEach(char => {
+      this._gatherWords(node.children[char], str + char, words);
+    })
+
+    return words;
   }
 }
 
