@@ -54,8 +54,17 @@ describe('Trie', () => {
       //       by the words "handy" and "useful".
     });
 
+    it('Remove() throws Error for invalid inputs', () => {
+      expect(trie.remove.bind(trie, '')).to.throw(Error);
+      expect(trie.remove.bind(trie)).to.throw(Error);
+      expect(trie.remove.bind(trie, 'abcd')).to.throw(Error);
+    })
+
     it('Remove() removes the prefix and all descendent words', () => {
-      
+      trie.remove('bushes');
+      expect(trie.contains('bushes')).to.be.false;
+      expect(trie.predict('b')).to.have.lengthOf(6)
+        .and.have.members(["bee", "better", "borrow", "bouncy", "branch", "brave", "business"]);
     })
 
   });
