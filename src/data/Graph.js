@@ -41,17 +41,18 @@ class Graph {
       throw new Error('Error: a vertex with that value does not exist.');
     }
 
+    // Delete the vertex
     let removedVertex = this._vertices[value];
     delete this._vertices[value];
 
-    /****************************************************
-    ****************************************************/
-    /****************************************************
-    ** TODO: Remove all edges connected to this Vertex **
-    ****************************************************/
-    /****************************************************
-    ****************************************************/
+    // Loop through the other vertices
+    for (let prop in this._vertices) {
+      // Delete the edge that connects to the removed vertex
+      let vertex = this._vertices[prop];
+      delete vertex.connections[value];
+    }
 
+    return removedVertex;
   }
 
   /*
@@ -74,16 +75,9 @@ class Graph {
   }
 
   /*
-  ** Returns the collection of vertices that this vertex links to
-  ** Note: this is a directed graph (edges have a one-way connection)
-  */
-  getNeighbors(vertex) {
-
-  }
-
-  /*
   ** Creates an edge that links a vertex to another vertex
   ** An optional weight can be given to the edge, defaults to 0
+  ** If an edge already exists there, it will be replaced by a new one
   */
   addEdge(fromNode, toNode, weight) {
     // Throw an error for invalid input vertex nodes
