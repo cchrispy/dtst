@@ -86,14 +86,43 @@ class Graph {
   ** An optional weight can be given to the edge, defaults to 0
   */
   addEdge(fromNode, toNode, weight) {
+    // Throw an error for invalid input vertex nodes
+    let error = new Error('Error: edges can only be added to two valid vertices.');
+    this._validate(fromNode, toNode, error);
 
+    let newEdge = new Edge(fromNode, toNode, weight);
+    fromNode.connect(newEdge);
+    return newEdge;
   }
 
   /*
   ** Removes an edge that links a vertex to another vertex
+  ** The input can either be a fromNode & toNode
+  ** or the input can be an edge
   */
   removeEdge(fromNode, toNode) {
+    // Set the startNode and endNode appropriately depending on the type of input
+    var startNode, endNode;
 
+    if (fromNode instanceof Edge) {
+      // If the first argument is an Edge node instead of a Vertex node
+      let edge  = fromNode;
+      startNode = edge.fromNode;
+      endNode   = edge.toNode;
+    } else {
+      // If the first argument is a Vertex node instead of an Edge node
+      let error = new Error('Error: inputs must be valid Vertices');
+      this._validate(fromNode, toNode, error);
+
+      startNode = fromNode;
+      endNode   = toNode;
+    }
+
+    let endNodeValue = endNode.value;
+    let removedEdge  = startNode.connections[endNodeValue];
+    delete startNode.connections[endNodeValue];
+
+    return removedEdge;
   }
 
   /*
@@ -101,7 +130,13 @@ class Graph {
   ** Useful for adjusting the weight of that edge
   */
   getEdge(fromNode, toNode) {
+    // Throw an error for invalid input vertex nodes
+    let error = new Error('Error: inputs must be valid Vertices.');
+    this._validate(fromNode, toNode, error);
 
+    // Return the edge if it exists, otherwise return false
+    let edge = fromNode.connections[toNode.value]
+    return edge ? edge : false;
   }
 
   /*
@@ -114,6 +149,20 @@ class Graph {
     }
 
     return typeof val === 'string' ? val : JSON.stringify(val);
+  }
+
+  /*
+  ** Throw a custom error if the nodes are not vertices in the Graph
+  */
+  _validate(fromNode, toNode, err) {
+    if (!(fromNode instanceof Vertex) || !(toNode instanceof Vertex)) {
+      throw err;
+    }
+    if (!this._vertices[fromNode.value] || !this._vertices[toNode.value]) {
+      throw err;
+    }
+
+    return true;
   }
 }
 
