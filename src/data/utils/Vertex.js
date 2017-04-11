@@ -8,7 +8,8 @@ class Vertex {
   ** Draws a connection between this node to another node
   */
   connect(edge) {
-
+    let toNodeValue = edge.toNode.value;
+    this.connections[toNodeValue] = edge;
   }
 
   /*
@@ -16,7 +17,13 @@ class Vertex {
   ** Note: this is a directed graph (edges have a one-way connection)
   */
   getNeighbors() {
-
+    let vertices = {};
+    for (let prop in this.connections) {
+      let edge = this.connections[prop];
+      vertices[prop] = edge.toNode;
+    }
+    
+    return vertices;
   }
 }
 
