@@ -3,7 +3,7 @@ import Edge from './utils/Edge';
 
 class Graph {
   constructor() {
-    this.size     = 0;
+    this.size      = 0;
     this._vertices = {};
   }
 
@@ -24,6 +24,7 @@ class Graph {
     // Create a new Vertex node; store it and return the vertex
     let newVertex = new Vertex(value);
     this._vertices[value] = newVertex;
+    this.size++;
     return newVertex;
   }
 
@@ -44,6 +45,7 @@ class Graph {
     // Delete the vertex
     let removedVertex = this._vertices[value];
     delete this._vertices[value];
+    this.size--;
 
     // Loop through the other vertices
     for (let prop in this._vertices) {
