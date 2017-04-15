@@ -1,5 +1,6 @@
 import { expect } from 'chai';
-import Trie, { Node as TrieNode } from '../src/data/Trie';
+import Trie from '../src/data/Trie';
+import { Node_Trie as Node } from '../src/data/utils/Node';
 
 describe('Trie', () => {
 

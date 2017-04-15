@@ -6,4 +6,17 @@ class Node_Tree {
   }
 }
 
-export { Node_Tree };
+class Node_Trie {
+  constructor(val) {
+    /*
+    ** The node stores a single character as its value.
+    ** Child nodes are stored in an object instead of an array for constant-time lookup
+    ** because every child node will have a unique value/letter
+    */
+    this.val = val;
+    this.children = {};
+  }
+}
+
+
+export { Node_Tree, Node_Trie };
