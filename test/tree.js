@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import Tree from '../src/data/Tree';
-import Node from '../src/data/utils/Node';
+import { Node_Tree as Node } from '../src/data/utils/Node';
 
 describe('Tree', () => {
 

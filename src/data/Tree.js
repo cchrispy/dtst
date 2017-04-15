@@ -1,4 +1,4 @@
-import Node from './utils/Node';
+import { Node_Tree as Node } from './utils/Node';
 
 class Tree {
   constructor(val) {

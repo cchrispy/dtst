@@ -1,4 +1,4 @@
-class Node {
+class Node_Tree {
   constructor(val) {
     this.val = val;
     this.parent = null;
@@ -6,4 +6,4 @@ class Node {
   }
 }
 
-export default Node;
+export { Node_Tree };
