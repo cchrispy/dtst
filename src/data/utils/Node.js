@@ -20,6 +20,9 @@ class Node_Trie {
 
 class Node_BST {
   constructor(key, val) {
+    /*
+    ** Key should be an integer, for proper placement of the node in a Binary Search Tree
+    */
     this.key    = key;
     this.val    = val;
     this.parent = null;
