@@ -18,5 +18,13 @@ class Node_Trie {
   }
 }
 
+class Node_BST {
+  constructor(val) {
+    this.val   = val;
+    this.left  = null;
+    this.right = null;
+  }
+}
 
-export { Node_Tree, Node_Trie };
+
+export { Node_Tree, Node_Trie, Node_BST };
