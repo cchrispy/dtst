@@ -19,10 +19,12 @@ class Node_Trie {
 }
 
 class Node_BST {
-  constructor(val) {
-    this.val   = val;
-    this.left  = null;
-    this.right = null;
+  constructor(key, val) {
+    this.key    = key;
+    this.val    = val;
+    this.parent = null;
+    this.left   = null;
+    this.right  = null;
   }
 }
 
