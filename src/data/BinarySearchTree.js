@@ -13,15 +13,38 @@ class BinarySearchTree {
   ** otherwise the search will begin from the root node
   */
   search(key, node = this.head) {
-
+    
   }
 
   /*
   ** Inserts a key/value pair.
+  ** The key must be a number. If no value is provided, an empty string is used by default.
   ** Return the inserted node to be used as a reference.
   */
-  insert(key, val) {
+  insert(key, val = '') {
+    if (typeof key !== 'number') {
+      throw new Error('Error: key must be a number.');
+    }
 
+    let newNode = new Node(key, val);
+
+    if (!this.head) {
+      // If the head is null, set the new node as the root node
+      this.head = newNode;
+    } else {
+      // Get the appropriate leaf node and set it as the parent for the new node
+      // Attach the new node
+      let parent = this._findLeaf(key, this.head);
+      newNode.parent = parent;
+      if (key <= parent.key) {
+        parent.left = newNode;
+      } else {
+        parent.right = newNode;
+      }
+    }
+
+    this.size++;
+    return newNode;
   }
 
   /*
@@ -39,6 +62,23 @@ class BinarySearchTree {
   */
   traverse(cb, node = this.head) {
 
+  }
+
+  /*
+  ** Helper function to find the leaf node to insert a new node into
+  */
+  _findLeaf(key, node) {
+    if (key <= node.key) {
+      if (!node.left) {
+        return node;
+      }
+      return this._findLeaf(key, node.left);
+    } else {
+      if (!node.right) {
+        return node;
+      }
+      return this._findLeaf(key, node.right);
+    }
   }
 }
 
