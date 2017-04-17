@@ -27,9 +27,26 @@ class BinarySearchTree {
   }
 
   /*
+  ** Same as the 'search' method, but returns the entire node instead of the value.
+  */
+  searchNode(key, node = this.head) {
+    this._validateKey(key);
+
+    if (!node) {
+      return null;
+    }
+
+    if (node.key === key) {
+      return node;
+    } else {
+      return key < node.key ? this.searchNode(key, node.left) : this.searchNode(key, node.right);
+    }
+  }
+
+  /*
   ** Inserts a key/value pair.
   ** The key must be a number. If no value is provided, an empty string is used by default.
-  ** Return the inserted node to be used as a reference.
+  ** Return true.
   */
   insert(key, val = '') {
     this._validateKey(key);
@@ -52,7 +69,7 @@ class BinarySearchTree {
     }
 
     this.size++;
-    return newNode;
+    return true;
   }
 
   /*
@@ -81,10 +98,51 @@ class BinarySearchTree {
   /*
   ** Removes the node corresponding to the key.
   ** If the node contains children, then the nodes will be shifted around appropriately
-  ** Return the removed node.
+  ** Three cases:
+  **   - Node has no children : set the corresponding link in the parent to NULL
+  **   - Node has one child   : link the child directly to the parent of the removed node
+  **   - Node has two children: take the node (N) with the smallest key in the right-subtree and replace
+  **                            the removed node's key/value with N's key/value
+  ** Return true.
   */
   remove(key) {
+    var node = this.searchNode(key);
 
+    if (!node.left && !node.right) {
+      // the node has no children
+      if (key < node.parent.key) {
+        node.parent.left = null;
+      } else {
+        node.parent.right = null;
+      }
+    } else if ((node.left && !node.right) || (node.right && !node.left)) {
+      // the node has one child
+      if (key < node.parent.key) {
+        node.parent.left = node.left ? node.left : node.right;
+      } else {
+        node.parent.right = node.left ? node.left : node.right;
+      }
+    } else {
+      // the node has two children
+      // grab the node with the minimum key from the right-subtree
+      var min = node.right;
+      this.traverse(item => {
+        if (item.key < min.key) {
+          min = item;
+        }
+      }, node.right);
+      node.key = min.key;
+      node.val = min.val;
+
+      /*
+      ** TODO:
+      ** Remove that leaf node that was replaced!
+      ** Handle the case if the removed node is the root node!
+      */
+    }
+
+    this.size--;
+    return true;
   }
 
   /*
@@ -92,7 +150,17 @@ class BinarySearchTree {
   ** An optional node can be passed in as the starting point for the traversal.
   */
   traverse(cb, node = this.head) {
+    if (!node) {
+      return null;
+    }
 
+    cb(node);
+    if (node.left) {
+      this.traverse(cb, node.left);
+    }
+    if (node.right) {
+      this.traverse(cb, node.right);
+    }
   }
 
   /*
