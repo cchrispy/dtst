@@ -87,7 +87,7 @@ class BinarySearchTree {
 
     if (_node.key === key) {
       _node.val = val;
-      return _node;
+      return true;
     } else if (key < _node.key) {
       return this.update(key, val, _node.left);
     } else if (key > _node.key) {
@@ -110,17 +110,27 @@ class BinarySearchTree {
 
     if (!node.left && !node.right) {
       // the node has no children
-      if (key < node.parent.key) {
-        node.parent.left = null;
+      if (node === this.head) {
+        // if the node is the root node, set the head to null
+        this.head = null;
       } else {
-        node.parent.right = null;
+        if (key < node.parent.key) {
+          node.parent.left = null;
+        } else {
+          node.parent.right = null;
+        }
       }
     } else if ((node.left && !node.right) || (node.right && !node.left)) {
       // the node has one child
-      if (key < node.parent.key) {
-        node.parent.left = node.left ? node.left : node.right;
+      if (node === this.head) {
+        // if the node is the root node, re-assign the head node to the remaining child
+        this.head = node.left ? node.left : node.right;
       } else {
-        node.parent.right = node.left ? node.left : node.right;
+        if (key < node.parent.key) {
+          node.parent.left = node.left ? node.left : node.right;
+        } else {
+          node.parent.right = node.left ? node.left : node.right;
+        }
       }
     } else {
       // the node has two children
@@ -131,14 +141,16 @@ class BinarySearchTree {
           min = item;
         }
       }, node.right);
+
+      // the min node can be erased using the same remove-method, following case 1 or case 2
+      // the node that should be removed will have it's key/val replaced with the min node's values
+      this.remove(min.key);
       node.key = min.key;
       node.val = min.val;
 
-      /*
-      ** TODO:
-      ** Remove that leaf node that was replaced!
-      ** Handle the case if the removed node is the root node!
-      */
+      // since we call the remove method again, the size is decremented twice
+      // we need to increment it once to maintain the correct size
+      this.size++;
     }
 
     this.size--;
