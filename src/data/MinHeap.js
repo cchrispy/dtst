@@ -1,11 +1,16 @@
+/*
+** Binary Min Heap
+** Left child can be found at index 2i
+** Right child can be found at index 2i + 1
+** Parent is at index i/2 (floored)
+*/
+
 class MinHeap {
-  /*
-  ** Binary Min Heap
-  ** Left child is at index 2i
-  ** Right child is at index 2i + 1
-  ** Parent is at index i/2 (floored)
-  */
   constructor() {
+    /*
+    ** Use an array to store the information, since we only need indeces to reference an element.
+    ** This is convenient because Node classes are not needed.
+    */
     this._storage = [];
     this.size = 0;
   }
@@ -15,7 +20,10 @@ class MinHeap {
   ** The element will be bubbled up to the appropriate place: O(log n) complexity.
   */
   insert(n) {
+    this._storage[++this.size] = n;
+    this._bubble(this.size);
 
+    return true;
   }
 
   /*
@@ -30,17 +38,93 @@ class MinHeap {
   }
 
   /*
-  ** Remove and return the root (smallest) element in the heap: O(1) complexity.
+  ** Remove and return the root (smallest) element in the heap: O(log n) complexity.
   ** Replace it with the last element in the storage and sink it down to the appropriate place.
   */
   extract() {
+    if (!this.size) {
+      return null;
+    }
 
+    var min = this._storage[1];
+    var swapped = this._storage.pop();
+
+    if (this.size > 1) {
+      this._storage[1] = swapped;
+      this._sink(1);
+    }
+    this.size--;
+
+    return min;
   }
 
   /*
   ** Return the root (smallest) element in the heap, without removing it: O(1) complexity.
   */
   peek() {
+    return this._storage[1] || null;
+  }
+
+  /*
+  ** Continuously swap the element with the parent if it is smaller
+  */
+  _bubble(i) {
+
+  }
+
+  /*
+  ** Continuously swap the element with a child if it is larger
+  */
+  _sink(i) {
+
+  }
+
+  /*******************************
+  **** HELPER FUNCTIONS BELOW ****
+  ********************************/
+
+  // Get index of the left child
+  _getLeftChildIndex(i) {
+
+  }
+
+  // Get index of the right child
+  _getRightChildIndex(i) {
+
+  }
+
+  // Get index of the parent
+  _getParentIndex(i) {
+
+  }
+
+  // Check if left child exists
+  _verifyLeftChild(i) {
+
+  }
+
+  // Check if right child exists
+  _verifyRightChild(i) {
+
+  }
+
+  // Check if parent exists
+  _verifyParent(i) {
+
+  }
+
+  // Get the left child's value
+  _left(i) {
+
+  }
+
+  // Get the right child's value
+  _right(i) {
+
+  }
+
+  // Get the parent's value
+  _parent(i) {
 
   }
 }
