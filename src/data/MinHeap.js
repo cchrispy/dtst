@@ -85,47 +85,47 @@ class MinHeap {
 
   // Get index of the left child
   _getLeftChildIndex(i) {
-
+    return 2 * i;
   }
 
   // Get index of the right child
   _getRightChildIndex(i) {
-
+    return (2 * i) + 1;
   }
 
   // Get index of the parent
   _getParentIndex(i) {
-
+    return Math.floor(2 / i);
   }
 
   // Check if left child exists
   _verifyLeftChild(i) {
-
+    return this._getLeftChildIndex(i) <= this.size;
   }
 
   // Check if right child exists
   _verifyRightChild(i) {
-
+    return this._getRightChildIndex(i) <= this.size;
   }
 
   // Check if parent exists
   _verifyParent(i) {
-
+    return this._getParentIndex(i) > 0;
   }
 
   // Get the left child's value
   _left(i) {
-
+    return this._storage[this._getLeftChildIndex(i)];
   }
 
   // Get the right child's value
   _right(i) {
-
+    return this._storage[this._getRightChildIndex(i)];
   }
 
   // Get the parent's value
   _parent(i) {
-
+    return this._storage[this._getParentIndex(i)];
   }
 }
 
