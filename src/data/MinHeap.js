@@ -34,7 +34,21 @@ class MinHeap {
   ** in the appropriate spot: O(log n) complexity.
   */
   delete(i) {
+    if (!this._storage[i]) {
+      return null;
+    }
+
+    var deleted = this._storage[i];
+    this._storage[i] = this._storage.pop();
+    this.size--;
     
+    if (this._verifyParent(i) && this._storage[i] < this._parent(i)) {
+      this._bubble(i);
+    } else if (this._verifyLeftChild(i)) {
+      this._sink(i);
+    }
+
+    return deleted;
   }
 
   /*
