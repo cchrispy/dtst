@@ -10,6 +10,7 @@ class MinHeap {
     /*
     ** Use an array to store the information, since we only need indeces to reference an element.
     ** This is convenient because Node classes are not needed.
+    ** The size will keep track of the last spot (index) in the storage.
     */
     this._storage = [];
     this.size = 0;
@@ -27,14 +28,13 @@ class MinHeap {
   }
 
   /*
-  ** Deletes an element from the heap.
-  ** Start by finding the index location of the element, and swapping it with
-  ** the last element in the storage.
+  ** Deletes an element from the heap given its index location.
+  ** Swap the element with the last element in the storage.
   ** Then perform the appropriate bubble or sink operations to place it
   ** in the appropriate spot: O(log n) complexity.
   */
-  delete(n) {
-
+  delete(i) {
+    
   }
 
   /*
