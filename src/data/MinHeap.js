@@ -84,13 +84,37 @@ class MinHeap {
   */
   _bubble(i) {
 
+    var current = i;
+
+    while (this._verifyParent(current) && this._storage[current] < this._parent(current)) {
+      var parent  = this._getParentIndex(i);
+      var swap = this._storage[current];
+      this._storage[current] = this._storage[parent];
+      this._storage[parent]  = swap;
+      current = parent;
+    }
+
+    return true;
   }
 
   /*
-  ** Continuously swap the element with a child if it is larger
+  ** Continuously swap the element with a child if it is larger.
+  ** Note: if a swap needs to occur, it should occur with the smaller of the two children
   */
   _sink(i) {
 
+    var current = i;
+    var child   = this._getSmallerChildIndex(i);
+
+    while (child && this._storage[current] > this._storage[child]) {
+      var swap = this._storage[current];
+      this._storage[current] = this._storage[child];
+      this._storage[child]   = swap;
+      current = child;
+      child   = this._getSmallerChildIndex(current);
+    }
+
+    return true;
   }
 
   /*******************************
@@ -140,6 +164,19 @@ class MinHeap {
   // Get the parent's value
   _parent(i) {
     return this._storage[this._getParentIndex(i)];
+  }
+
+  // Get the index of the smaller child
+  _getSmallerChildIndex(i) {
+    if (!this._verifyLeftChild(i)) {
+      return false;
+    } else {
+      var index = this._getLeftChildIndex(i);
+      if (this._verifyRightChild(i) && this._left(i) > this._right(i)) {
+        index = this._getRightChildIndex(i);
+      }
+      return index;
+    }
   }
 }
 
