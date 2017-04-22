@@ -34,7 +34,7 @@ class MinHeap {
   ** in the appropriate spot: O(log n) complexity.
   */
   delete(i) {
-    if (!this._storage[i]) {
+    if (this._storage[i] === undefined) {
       return null;
     }
 
