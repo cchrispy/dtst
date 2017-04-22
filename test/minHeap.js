@@ -20,23 +20,30 @@ describe('Min Heap', () => {
     expect(minHeapSample.searchForIndex).to.be.a('function');
   });
 
-  describe('Min Heap methods', () => {
+  xdescribe('Min Heap methods', () => {
 
-    var minHeap;
+    var Heap;
     beforeEach(() => {
 
-      minHeap = new MinHeap();
+      Heap = new MinHeap();
 
       var numbers = [42, 9, 5, 12, 11, 99, 1, 23, 28, 33, 20];
       numbers.forEach(number => {
-        minHeap.insert(number);
+        Heap.insert(number);
       })
-      
+
     })
 
     it('The root element should be the smallest', () => {
-      
+      expect(Heap.peek()).to.equal(1);
     })
 
+    it('Delete and extract should rearrange the heap accordingly', () => {
+
+    });
+
+    it('Search and SearchForIndex', () => {
+      
+    })
   })
 })
