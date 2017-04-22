@@ -76,7 +76,7 @@ class MinHeap {
   ** Return the root (smallest) element in the heap, without removing it: O(1) complexity.
   */
   peek() {
-    return this._storage[1] || null;
+    return this._storage[1];
   }
 
   /*
@@ -109,7 +109,7 @@ class MinHeap {
     var current = i;
 
     while (this._verifyParent(current) && this._storage[current] < this._parent(current)) {
-      var parent  = this._getParentIndex(i);
+      var parent  = this._getParentIndex(current);
       var swap = this._storage[current];
       this._storage[current] = this._storage[parent];
       this._storage[parent]  = swap;
@@ -155,7 +155,7 @@ class MinHeap {
 
   // Get index of the parent
   _getParentIndex(i) {
-    return Math.floor(2 / i);
+    return Math.floor(i / 2);
   }
 
   // Check if left child exists
