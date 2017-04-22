@@ -44,7 +44,7 @@ class MinHeap {
     
     if (this._verifyParent(i) && this._storage[i] < this._parent(i)) {
       this._bubble(i);
-    } else if (this._verifyLeftChild(i)) {
+    } else {
       this._sink(i);
     }
 
@@ -77,6 +77,28 @@ class MinHeap {
   */
   peek() {
     return this._storage[1] || null;
+  }
+
+  /*
+  ** Iterates through the Min Heap and invokes a callback on each element: O(n) complexity.
+  ** Note: The callback receives the element's index as a second argument.
+  */
+  search(cb) {
+    for (let i = 1; i < this._storage.length; i++) {
+      cb(this._storage[i], i);
+    }
+  }
+
+  /*
+  ** Searches the Min Heap for the index of a target value: O(n) complexity.
+  */
+  searchForIndex(value) {
+    for (let i = 1; i < this._storage.length; i++) {
+      if (this._storage[i] === value) {
+        return i;
+      }
+    }
+    return false;
   }
 
   /*
