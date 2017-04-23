@@ -1,5 +1,5 @@
 # dtst
-A collection of data structures to use  
+A collection of data structures to use, with comments and examples. Still a work in progress!  
 
 ### What's included  
 - [Tree](./src/data/Tree.js)  
