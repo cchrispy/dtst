@@ -59,4 +59,44 @@ var size = tree.size;                   // -> 5
 ```  
 
 #### Trie  
-[Tries](https://en.wikipedia.org/wiki/Trie) (also known as radix trees or prefix trees) have an ordered tree data structure that is efficient for information re*trie*val. A few useful application for Tries can be for dictionary suggestions, autocomplete dictionaries, searching through a contact list, or searching through phone directories.
+[Tries](https://en.wikipedia.org/wiki/Trie) (also known as radix trees or prefix trees) have an ordered data structure that is efficient for information re*trie*val. There are several ways to construct a Trie, but they all share a tree structure. Each node can represent a single character string, and traversing down a tree can build words or prefixes. A few useful application for Tries: dictionary suggestions, autocomplete dictionaries, searching through a contact list, or searching through phone directories.  
+```javascript
+import { Trie } from 'dtst';
+
+// create an instance of Trie
+var trie = new Trie();
+
+// populate the Trie with a collection of 100 words
+const collection = [
+  "abrupt", "acid", "adventurous", "ahead", "amused", "appliance", "attach", "bee", "better", 
+  "borrow", "bouncy", "branch", "brave", "bushes", "business", "cagey", "carpenter", "cattle", 
+  "chin", "cloth", "confuse", "consist", "cool", "count", "craven", "deep", "digestion", "ear", 
+  "escape", "evasive", "even", "examine", "fit", "flood", "frequent", "furtive", "gather", 
+  "graceful", "grumpy", "guiltless", "half", "hand", "handy", "hate", "hose", "ill-fated", "jail", 
+  "kaput", "likeable", "limit", "look", "malicious", "meaty", "mere", "mine", "moaning", "monkey", 
+  "nail", "neck", "nippy", "noise", "obedient", "obeisant", "observant", "order", "park", 
+  "penitent", "perform", "press", "queue", "quickest", "quince", "racial", "remember", "remind", 
+  "replace", "ripe", "roll", "safe", "satisfy", "school", "serious", "shop", "slip", "slope", 
+  "small", "spark", "squeamish", "stiff", "store", "supply", "swim", "taste", "tiny", "trees", 
+  "use", "useful", "volcano", "vulgar", "whispering"
+];
+collection.forEach(word => trie.add(word));
+
+// check if certain words or prefixes exist
+trie.contains('monkey');   // -> true
+trie.contains('monk');     // -> true
+trie.contains('abrupt');   // -> true
+trie.contains('abruptly'); // -> false
+
+// autocomplete or predict words based off a given prefix
+trie.predict('a');   // -> ["abrupt", "acid", "adventurous", "ahead", "amused", "appliance", "attach"]
+trie.predict('con'); // -> ["confuse", "consist"]
+trie.predict('z');   // -> []
+
+// remove prefixes and their descendant words
+trie.remove('rem');
+trie.contains('remember'); // -> false
+trie.contains('remind');   // -> false
+trie.contains('replace');  // -> true
+trie.predict('r');         // -> ["racial", "replace", "ripe", "roll"]
+```
