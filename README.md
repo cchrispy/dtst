@@ -126,13 +126,20 @@ bst.search(10); // -> 'ten'
 bst.search(3);  // -> 'three'
 bst.size;       // -> 10
 
+// update a value given its key
+bst.update(4, 'I am the root node!');
+bst.update(8, 'I ate eight');
+bst.search(4);  // -> 'I am the root node!'
+bst.search(8);  // -> 'I ate eight'
+
 // remove nodes corresponding to a key
 // note: this may cause nodes to be rearranged to maintain the sort pattern
 bst.remove(6);
-bst.remove(4); // remove the root node
+bst.remove(4);  // removes the root node
 
-bst.size;      // -> 8
-bst.search(4); // -> null
-bst.search(6); // -> null
-bst.head;      // -> Node instance { key: 7, value: 'seven' }
-```
+bst.size;       // -> 8
+bst.search(4);  // -> null
+bst.search(6);  // -> null
+bst.search(8);  // -> 'I ate eight'
+bst.head;       // -> Node instance { key: 7, value: 'seven' }
+```  
