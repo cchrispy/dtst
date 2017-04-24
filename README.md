@@ -102,4 +102,37 @@ trie.predict('r');         // -> ["racial", "replace", "ripe", "roll"]
 ```  
 
 ### Binary Search Tree  
-[Binary Search Trees](https://en.wikipedia.org/wiki/Binary_search_tree) efficiently store data in a sorted form that allow fast lookup, addition, and removal of items. BST operations uses the principle of [binary search](https://en.wikipedia.org/wiki/Binary_search_algorithm) when traversing the tree, so lookup/insertion/deletion operations work approximately at logarithmic time complexity.
+[Binary Search Trees](https://en.wikipedia.org/wiki/Binary_search_tree) efficiently store data in a sorted form that allow fast lookup, addition, and removal of items. BST operations uses the principle of [binary search](https://en.wikipedia.org/wiki/Binary_search_algorithm) when traversing the tree, so lookup/insertion/deletion operations work approximately at logarithmic time complexity.  
+```javascript
+import { BinarySearchTree } from 'dtst';
+
+// create an instance of BinarySearchTree
+var bst = new BinarySearchTree();
+
+// insert key/value pairs, where the key is a unique number (used to determine how data is sorted)
+bst.insert(4, 'four'); // the root node
+bst.insert(2, 'two');
+bst.insert(3, 'three');
+bst.insert(1, 'one');
+bst.insert(0, 'zero');
+bst.insert(10, 'ten');
+bst.insert(8, 'eight');
+bst.insert(11, 'eleven');
+bst.insert(7, 'seven');
+bst.insert(6, 'six');
+
+// search for a value given a key
+bst.search(10); // -> 'ten'
+bst.search(3);  // -> 'three'
+bst.size;       // -> 10
+
+// remove nodes corresponding to a key
+// note: this may cause nodes to be rearranged to maintain the sort pattern
+bst.remove(6);
+bst.remove(4); // remove the root node
+
+bst.size;      // -> 8
+bst.search(4); // -> null
+bst.search(6); // -> null
+bst.head;      // -> Node instance { key: 7, value: 'seven' }
+```
