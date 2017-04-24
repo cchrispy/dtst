@@ -108,6 +108,10 @@ class BinarySearchTree {
   remove(key) {
     var node = this.searchNode(key);
 
+    if (!node) {
+      throw new Error('Error: that key does not exist.');
+    }
+
     if (!node.left && !node.right) {
       // the node has no children
       if (node === this.head) {
