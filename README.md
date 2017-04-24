@@ -145,4 +145,42 @@ bst.head;       // -> Node instance { key: 7, value: 'seven' }
 ```  
 
 ### Graph
-[Graphs](https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)) are vertices (nodes) connected by edges. In fact, a tree data structure can be considered a type of graph. Graphs are useful for anything network related, routing, finding relationships, etc. Connections with friends on social media, Google Maps finding a route based on shorest routes, internet pages linked by hyperlinks, are all real life applications of graphs.  
+[Graphs](https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)) are vertices (nodes) connected by edges. In fact, a tree data structure can be considered a type of graph. Graphs are useful for anything network related, routing, finding relationships, etc. Connections with friends on social media, Google Maps finding a route based on shortest routes, internet pages linked by hyperlinks, are all real life applications of graphs.  
+```javascript
+import { Graph } from 'dtst';
+
+// create an instance of Graph
+var graph = new Graph();
+
+// add vertices
+let sanFrancisco = graph.addVertex('San Francisco');
+let sanJose      = graph.addVertex('San Jose');
+let sacramento   = graph.addVertex('Sacramento');
+let losAngeles   = graph.addVertex('Los Angeles');
+
+// connect vertices with edges
+// edges can be given an optional numeric weight, which defaults to 0
+// note: edges are directional, meaning an edge from A to B does not mean an edge from B to A
+graph.addEdge(sanFrancisco, sacramento, 6);
+graph.addEdge(sanFrancisco, sanJose, 4);
+graph.addEdge(sanFrancisco, losAngeles, 16);
+graph.addEdge(losAngeles, sanFrancisco, 18);
+graph.addEdge(sanJose, sacramento);
+graph.addEdge(sanJose, sanFrancisco, 5);
+
+// get neighbors (direct connections) of a vertex
+sanFrancisco.getNeighbors(); // -> { 'Sacramento', 'San Jose', 'Los Angeles' }
+losAngeles.getNeighbors();   // -> { 'San Francisco' }
+sanJose.getNeighbors();      // -> { 'Sacramento', 'San Francisco' }
+sacramento.getNeighbors();   // -> { }
+
+// remove an edge between two vertices
+graph.removeEdge(sanFrancisco, losAngeles);
+sanFrancisco.getNeighbors(); // -> { 'Sacramento', 'San Jose' }
+losAngeles.getNeighbors();   // -> { 'San Francisco' }
+
+// remove a vertex, which will also remove connections to and from that vertex
+graph.removeVertex(sanFrancisco); // graph.removeVertex('San Francisco') will also work
+losAngeles.getNeighbors();        // -> { }
+sanJose.getNeighbors();           // -> { 'Sacramento' }
+```
