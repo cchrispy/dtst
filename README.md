@@ -143,3 +143,6 @@ bst.search(6);  // -> null
 bst.search(8);  // -> 'I ate eight'
 bst.head;       // -> Node instance { key: 7, value: 'seven' }
 ```  
+
+### Graph
+[Graphs](https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)) are vertices (nodes) connected by edges. In fact, a tree data structure can be considered a type of graph. Graphs are useful for anything network related, routing, finding relationships, etc. Connections with friends on social media, Google Maps finding a route based on shorest routes, internet pages linked by hyperlinks, are all real life applications of graphs.  
