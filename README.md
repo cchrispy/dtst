@@ -9,7 +9,7 @@ A collection of data structures to use, with comments and examples. Still a work
 - [Min Heap](./src/data/MinHeap.js)  
 
 ## Usage  
-#### Tree  
+### Tree  
 [Trees](https://en.wikipedia.org/wiki/Tree_(data_structure)) are commonly used data structures for storing hierarchical information, such as a file system on a computer (think about navigating through directories and their sub-directories).  
 ```javascript
 import { Tree } from 'dtst';
@@ -58,7 +58,7 @@ tree.contains('Child of grandChild_3'); // -> returns false
 var size = tree.size;                   // -> 5
 ```  
 
-#### Trie  
+### Trie  
 [Tries](https://en.wikipedia.org/wiki/Trie) (also known as radix trees or prefix trees) have an ordered data structure that is efficient for information re*trie*val. There are several ways to construct a Trie, but they all share a tree structure. Each node can represent a single character string, and traversing down a tree can build words or prefixes. A few useful application for Tries: dictionary suggestions, autocomplete dictionaries, searching through a contact list, or searching through phone directories.  
 ```javascript
 import { Trie } from 'dtst';
@@ -99,4 +99,7 @@ trie.contains('remember'); // -> false
 trie.contains('remind');   // -> false
 trie.contains('replace');  // -> true
 trie.predict('r');         // -> ["racial", "replace", "ripe", "roll"]
-```
+```  
+
+### Binary Search Tree  
+[Binary Search Trees](https://en.wikipedia.org/wiki/Binary_search_tree) efficiently store data in a sorted form that allow fast lookup, addition, and removal of items. BST operations uses the principle of [binary search](https://en.wikipedia.org/wiki/Binary_search_algorithm) when traversing the tree, so lookup/insertion/deletion operations work approximately at logarithmic time complexity.
