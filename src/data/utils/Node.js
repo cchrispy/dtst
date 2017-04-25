@@ -31,5 +31,17 @@ class Node_BST {
   }
 }
 
+class Node_LinkedList {
+  constructor(val) {
+    /*
+    ** A block of information stored in a doubly linked list.
+    ** Stores references to the next and previous nodes.
+    */
+    this.val  = val;
+    this.next = null;
+    this.prev = null;
+  }
+}
+
 
 export { Node_Tree, Node_Trie, Node_BST };
