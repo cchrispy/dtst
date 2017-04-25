@@ -187,3 +187,28 @@ sanJose.getNeighbors();           // -> { 'Sacramento' }
 
 ### Heap  
 [Heaps](https://en.wikipedia.org/wiki/Heap_(data_structure)) are tree-based data structures where the parent-child ordering is consistent across the whole heap. In a min heap, every parent node's key is smaller than its children; therefore the root node will always contain the smallest node. In a max heap, every parent node's key is larger. They are useful for keeping track of the smallest (or largest) value in a stream of data. Heaps are often implemented in [priority queues](https://en.wikipedia.org/wiki/Priority_queue).  
+```javascript
+import { MinHeap } from 'dtst';
+
+// create an instance of MinHeap
+var heap = new MinHeap();
+
+// insert some data into the heap
+const numbers = [42, 9, 5, 12, 11, 99, 1, 23, 28, 33, 20];
+numbers.forEach(number => heap.insert(number));
+
+// peek at the minimum element (the root element)
+heap.peek(); // -> 1
+
+// extract or remove the minimum element
+// the heap will be re-arranged with the next smallest element as the root
+heap.extract(); // -> 1
+heep.peek();    // -> 5
+
+// keys correspond to a particular index location of an array
+heap.searchForIndex(5); // -> 1 (5 is the smallest element, thus it's at the first index)
+
+// delete an element based on its index location
+heap.delete(1); // deleting the first element is essentially the same as heap.extract()
+heap.peek(); // -> 9
+```
