@@ -183,4 +183,7 @@ losAngeles.getNeighbors();   // -> { 'San Francisco' }
 graph.removeVertex(sanFrancisco); // graph.removeVertex('San Francisco') will also work
 losAngeles.getNeighbors();        // -> { }
 sanJose.getNeighbors();           // -> { 'Sacramento' }
-```
+```  
+
+### Heap  
+[Heaps](https://en.wikipedia.org/wiki/Heap_(data_structure)) are tree-based data structures where the parent-child ordering is consistent across the whole heap. In a min heap, every parent node's key is smaller than its children; therefore the root node will always contain the smallest node. In a max heap, every parent node's key is larger. They are useful for keeping track of the smallest (or largest) value in a stream of data. Heaps are often implemented in [priority queues](https://en.wikipedia.org/wiki/Priority_queue).  
