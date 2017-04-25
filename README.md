@@ -7,6 +7,7 @@ A collection of data structures to use, with comments and examples. Still a work
 - [Binary Search Tree](./src/data/BinarySearchTree.js)  
 - [Graph](./src/data/Graph.js)  
 - [Min Heap](./src/data/MinHeap.js)  
+- Linked List (in progress)  
 
 ## Usage  
 ### Tree  
@@ -212,3 +213,6 @@ heap.searchForIndex(5); // -> 1 (5 is the smallest element, thus it's at the fir
 heap.delete(1); // deleting the first element is essentially the same as heap.extract()
 heap.peek();    // -> 9
 ```
+
+### Linked List
+[Linked lists](https://en.wikipedia.org/wiki/Linked_list) are linear collections of nodes where each node has a reference to the next node in line. In a doubly linked list, each node has a reference to the next and previous node. Linked Lists are advantageous over arrays because insertion/deletion operations involve a simple rearrangement of pointers. The same operations on an array require reorganizing the structure because the data is stored contiguously in memory. Linked lists can be used in creating stacks and queues to avoid pre-allocating memory for all elements.
