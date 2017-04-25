@@ -210,5 +210,5 @@ heap.searchForIndex(5); // -> 1 (5 is the smallest element, thus it's at the fir
 
 // delete an element based on its index location
 heap.delete(1); // deleting the first element is essentially the same as heap.extract()
-heap.peek(); // -> 9
+heap.peek();    // -> 9
 ```
