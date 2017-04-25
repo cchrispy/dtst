@@ -44,4 +44,4 @@ class Node_LinkedList {
 }
 
 
-export { Node_Tree, Node_Trie, Node_BST };
+export { Node_Tree, Node_Trie, Node_BST, Node_LinkedList };
