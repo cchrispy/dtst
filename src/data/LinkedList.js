@@ -16,7 +16,19 @@ class LinkedList {
   ** Operates in O(1) time
   */
   addToHead(val) {
+    let node = new Node(val);
 
+    if (!this.size) {
+      this.head = node;
+      this.tail = node;
+    } else {
+      node.next      = this.head;
+      this.head.prev = node;
+      this.head      = node;
+    }
+
+    this.size++;
+    return true;
   }
 
   /*
@@ -24,7 +36,19 @@ class LinkedList {
   ** Operates in O(1) time
   */
   addToTail(val) {
+    let node = new Node(val);
 
+    if (!this.size) {
+      this.head = node;
+      this.tail = node;
+    } else {
+      node.prev      = this.tail;
+      this.tail.next = node;
+      this.tail      = node;
+    }
+
+    this.size++;
+    return true;
   }
 
   /*
@@ -74,6 +98,13 @@ class LinkedList {
   */
   traverse(cb) {
 
+  }
+
+  /*
+  ** Return the number of elements in the linked list
+  */
+  getSize() {
+    return this.size;
   }
 }
 
