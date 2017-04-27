@@ -65,7 +65,19 @@ class LinkedList {
   ** Operates in O(1) time
   */
   deleteHead() {
+    if (!this.size) {
+      return null;
+    }
+    if (this.size === 1) {
+      this.head = null;
+      this.tail = null;
+    } else {
+      this.head      = this.head.next;
+      this.head.prev = null;
+    }
 
+    this.size--;
+    return true;
   }
 
   /*
@@ -73,7 +85,19 @@ class LinkedList {
   ** Operates in O(1) time
   */
   deleteTail() {
+    if (!this.size) {
+      return null;
+    }
+    if (this.size === 1) {
+      this.head = null;
+      this.tail = null;
+    } else {
+      this.tail      = this.tail.prev;
+      this.tail.next = null;
+    }
 
+    this.size--;
+    return true;
   }
 
   /*
