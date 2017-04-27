@@ -158,6 +158,32 @@ class LinkedList {
   }
 
   /*
+  ** Reverses the linked list
+  ** Operates in O(n) time
+  */
+  reverse() {
+    if (!this.size) { return true }
+
+    var currentNode = this.head;
+    var ref         = currentNode.next;
+    while (currentNode) {
+      var prev = currentNode.prev;
+      var next = currentNode.next;
+      currentNode.next = prev;
+      currentNode.prev = next;
+      currentNode = ref;
+      ref = ref ? ref.next : null;
+    }
+
+    var head  = this.head;
+    var tail  = this.tail;
+    this.head = tail;
+    this.tail = head;
+
+    return true;
+  }
+
+  /*
   ** Return the number of elements in the linked list
   */
   getSize() {
