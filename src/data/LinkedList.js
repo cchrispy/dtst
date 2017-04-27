@@ -134,7 +134,15 @@ class LinkedList {
   ** Operates in O(n) time
   */
   search(val) {
+    var currentNode = this.head;
+    while (currentNode) {
+      if (currentNode.val === val) {
+        return currentNode;
+      }
+      currentNode = currentNode.next;
+    }
 
+    return false;
   }
 
   /*
@@ -142,7 +150,11 @@ class LinkedList {
   ** Operates in O(n) time
   */
   traverse(cb) {
-
+    var currentNode = this.head;
+    while (currentNode) {
+      cb(currentNode);
+      currentNode = currentNode.next;
+    }
   }
 
   /*
