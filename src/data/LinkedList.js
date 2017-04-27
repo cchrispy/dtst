@@ -57,7 +57,19 @@ class LinkedList {
   ** Operates in O(1) time given the reference node
   */
   insert(val, node) {
+    if (!node) {
+      throw new Error('Error: A valid reference node must be supplied for the new node to be inserted after.');
+    }
 
+    if (this.tail === node) { return this.addToTail(val) }
+
+    let newNode  = new Node(val);
+    newNode.prev = node;
+    newNode.next = node.next;
+    node.next    = newNode;
+
+    this.size++;
+    return true;
   }
 
   /*
@@ -65,9 +77,8 @@ class LinkedList {
   ** Operates in O(1) time
   */
   deleteHead() {
-    if (!this.size) {
-      return null;
-    }
+    if (!this.size) { return null }
+
     if (this.size === 1) {
       this.head = null;
       this.tail = null;
@@ -85,9 +96,8 @@ class LinkedList {
   ** Operates in O(1) time
   */
   deleteTail() {
-    if (!this.size) {
-      return null;
-    }
+    if (!this.size) { return null }
+
     if (this.size === 1) {
       this.head = null;
       this.tail = null;
@@ -105,7 +115,18 @@ class LinkedList {
   ** Operates in O(1) time
   */
   delete(node) {
+    if (!node) {
+      throw new Error('Error: A valid node must be supplied to be deleted.');
+    }
 
+    if (this.head === node) { return this.deleteHead() } 
+    if (this.tail === node) { return this.deleteTail() }
+
+    node.prev.next = node.next;
+    node.next.prev = node.prev;
+
+    this.size--;
+    return true;
   }
 
   /*
