@@ -7,7 +7,7 @@ A collection of data structures to use, with comments and examples. Still a work
 - [Binary Search Tree](./src/data/BinarySearchTree.js)  
 - [Graph](./src/data/Graph.js)  
 - [Min Heap](./src/data/MinHeap.js)  
-- Linked List (./src/data/LinkedList.js)  
+- [Linked List](./src/data/LinkedList.js)  
 
 ## Usage  
 ### Tree  
@@ -226,22 +226,22 @@ var list = new LinkedList();
 // use .search(value) to get a node from the list with the given value to be used as a reference
 ['A', 'B', 'C', 'D', 'E'].forEach(letter => list.addToTail(letter));
 list.addToHead('ZERO');
-/***  (HEAD) --> ZERO <--> A <--> B <--> C <--> D <--> E <-- (TAIL)  ***/
+/***  (HEAD) --> ZERO --- A --- B --- C --- D --- E <-- (TAIL)  ***/
 list.insert('foo', list.search('C'));
 list.addToTail('F');
 list.insert('bar', list.search('F'));
-/***  (HEAD) --> ZERO <--> A <--> B <--> C <--> foo <--> D <--> E <--> F <--> bar <-- (TAIL)  ***/
+/***  (HEAD) --> ZERO --- A --- B --- C --- foo --- D --- E --- F --- bar <-- (TAIL)  ***/
 list.getSize(); // -> 9
 
 // delete nodes from the linked list
 list.deleteHead();
 list.deleteTail();
-/***  (HEAD) --> A <--> B <--> C <--> foo <--> D <--> E <--> F <-- (TAIL)  ***/
+/***  (HEAD) --> A --- B --- C --- foo --- D --- E --- F <-- (TAIL)  ***/
 list.delete(list.search('foo'));
 list.delete(list.search('F'));
-/***  (HEAD) --> A <--> B <--> C <--> D <--> E <-- (TAIL)  ***/
+/***  (HEAD) --> A --- B --- C --- D --- E <-- (TAIL)  ***/
 
 // reverse the linked list
 list.reverse();
-/***  (HEAD) --> E <--> D <--> C <--> B <--> A <-- (TAIL)  ***/
+/***  (HEAD) --> E --- D --- C --- B --- A <-- (TAIL)  ***/
 ```
