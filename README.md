@@ -9,6 +9,31 @@ A collection of data structures to use, with comments and examples. Still a work
 - [Min Heap](./src/data/MinHeap.js)  
 - [Linked List](./src/data/LinkedList.js)  
 
+### Getting started  
+Install with npm:  
+```
+$ npm install dtst
+```  
+How to use:  
+```javascript
+import { MinHeap } from 'dtst';
+
+var heap = new MinHeap();
+heap.insert(4);
+heap.insert(6);
+heap.insert(7);
+heap.extract();
+```  
+#### For contributors  
+Install dependencies:  
+```
+$ npm install
+```  
+Run tests:  
+```
+$ npm test
+```  
+
 ## Usage  
 ### Tree  
 [Trees](https://en.wikipedia.org/wiki/Tree_(data_structure)) are commonly used data structures for storing hierarchical information, such as a file system on a computer (think about navigating through directories and their sub-directories).  
