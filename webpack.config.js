@@ -4,7 +4,8 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: __dirname + '/dist',
-    filename: 'index.min.js'
+    filename: 'index.min.js',
+    libraryTarget: 'commonjs2'
   },
   module: {
     rules: [
