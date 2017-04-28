@@ -5,4 +5,4 @@ import Graph from './data/Graph';
 import MinHeap from './data/MinHeap';
 import LinkedList from './data/LinkedList';
 
-export default { Tree, Trie, BinarySearchTree, Graph, MinHeap }
+export { Tree, Trie, BinarySearchTree, Graph, MinHeap, LinkedList }
