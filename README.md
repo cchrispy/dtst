@@ -7,7 +7,7 @@ A collection of data structures to use, with comments and examples. Still a work
 - [Binary Search Tree](./src/data/BinarySearchTree.js)  
 - [Graph](./src/data/Graph.js)  
 - [Min Heap](./src/data/MinHeap.js)  
-- Linked List (in progress)  
+- Linked List (./src/data/LinkedList.js)  
 
 ## Usage  
 ### Tree  
