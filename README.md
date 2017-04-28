@@ -215,4 +215,33 @@ heap.peek();    // -> 9
 ```
 
 ### Linked List
-[Linked lists](https://en.wikipedia.org/wiki/Linked_list) are linear collections of nodes where each node has a reference to the next node in line. In a doubly linked list, each node has a reference to the next and previous node. Linked Lists are advantageous over arrays because insertion/deletion operations involve a simple rearrangement of pointers. The same operations on an array require reorganizing the structure because the data is stored contiguously in memory. Linked lists can be used in creating stacks and queues to avoid pre-allocating memory for all elements.
+[Linked lists](https://en.wikipedia.org/wiki/Linked_list) are linear collections of nodes where each node has a reference to the next node in line. In a doubly linked list, each node has a reference to the next and previous node. Linked Lists are advantageous over arrays because insertion/deletion operations involve a simple rearrangement of pointers. The same operations on an array require reorganizing the structure because the data is stored contiguously in memory. Linked lists can be used in creating stacks and queues to avoid pre-allocating memory for all elements.  
+```javascript
+import { LinkedList } from 'dtst';
+
+// create an instance of LinkedList
+var list = new LinkedList();
+
+// insert values into the linked list
+// use .search(value) to get a node from the list with the given value to be used as a reference
+['A', 'B', 'C', 'D', 'E'].forEach(letter => list.addToTail(letter));
+list.addToHead('ZERO');
+/***  (HEAD) --> ZERO <--> A <--> B <--> C <--> D <--> E <-- (TAIL)  ***/
+list.insert('foo', list.search('C'));
+list.addToTail('F');
+list.insert('bar', list.search('F'));
+/***  (HEAD) --> ZERO <--> A <--> B <--> C <--> foo <--> D <--> E <--> F <--> bar <-- (TAIL)  ***/
+list.getSize(); // -> 9
+
+// delete nodes from the linked list
+list.deleteHead();
+list.deleteTail();
+/***  (HEAD) --> A <--> B <--> C <--> foo <--> D <--> E <--> F <-- (TAIL)  ***/
+list.delete(list.search('foo'));
+list.delete(list.search('F'));
+/***  (HEAD) --> A <--> B <--> C <--> D <--> E <-- (TAIL)  ***/
+
+// reverse the linked list
+list.reverse();
+/***  (HEAD) --> E <--> D <--> C <--> B <--> A <-- (TAIL)  ***/
+```
